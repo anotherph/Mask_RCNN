@@ -51,7 +51,7 @@ class TestConfig(Config):
 MODEL_DIR = os.path.join(ROOT_DIR, "logs")
 
 # Local path to trained weights file
-COCO_MODEL_PATH = os.path.join(ROOT_DIR, "mask_rcnn_deepfashion2_0100.h5")
+COCO_MODEL_PATH = os.path.join(ROOT_DIR, "mask_rcnn_deepfashion2_0071.h5")
 # Download COCO trained weights from Releases if needed
 #if not os.path.exists(COCO_MODEL_PATH):
 #    utils.download_trained_weights(COCO_MODEL_PATH)
@@ -112,7 +112,8 @@ tf.keras.Model.load_weights(model.keras_model, COCO_MODEL_PATH, by_name=True)
 #                                       dataset.image_reference(image_id)))
     
 #image = skimage.io.imread('/home/jekim/workspace/Deepfashion2_Training/Deepfashion2_Training/dataset_temp/test/image/000138.jpg')
-image = skimage.io.imread('/home/jekim/workspace/Deepfashion2_Training/Deepfashion2_Training/test2.jpg')
+#image = skimage.io.imread('/home/jekim/workspace/Deepfashion2_Training/Deepfashion2_Training/test2.jpg')
+image = skimage.io.imread('/home/jekim/workspace/Deep-Fashion-Analysis-ECCV2018/pics/test_16.jpg')
 
 # Run object detection
 results = model.detect([image], verbose=1)
@@ -127,6 +128,8 @@ visualize.display_instances(image, r['rois'], r['masks'], r['class_ids'],
 class_result=np.array(r['class_ids']-1)
 for i in class_result:
     print(class_names[i])
+
+# plt.imshow(r['masks'][:,:,0])
 
 #log("gt_class_id", gt_class_id)
 #log("gt_bbox", gt_bbox)
